@@ -34,7 +34,7 @@ def bot():
     if len(keys)!=3:
         send(invalid_comand_error, number)
     else:
-        send(f'procurando notas de {keys[2]} da cadeira {keys[1]}')
+        send(f'procurando notas de {keys[2]} da cadeira {keys[1]}', number)
 
     return jsonify({'message': 'Success'})
 
