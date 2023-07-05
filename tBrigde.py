@@ -1,4 +1,5 @@
-from config import auth_token, account_sid
+from config import *
+
 from twilio.rest import Client
 from flask import Flask, request, jsonify
 
@@ -26,9 +27,14 @@ app = Flask(__name__)
 @app.route('/', methods=['POST'])
 def bot():
     number = request.form.get('From')
-    request.values.get('Body', '')
-    send('Mensagem recebida!', number)
-    send('Comando recebido, buscando notas', number)
+    message = request.values.get('Body', '')
+
+    #send('Comando recebido, buscando notas', number)
+    keys = message.split('/')
+    if len(keys)!=3:
+        send(invalid_comand_error, number)
+    else:
+        send(f'procurando notas de {keys[2]} da cadeira {keys[1]}')
 
     return jsonify({'message': 'Success'})
 
