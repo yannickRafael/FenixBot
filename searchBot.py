@@ -48,7 +48,7 @@ def obter_link(sigla):
 def getNotas(curso, cadeira, nr):
     print('==BOT STARTED==')
     print(str(curso)+' '+str(cadeira))
-    html = search.main(login_url, obter_link(curso, cadeira))
+    html = search.main(login_url, obter_link(cadeira))
     b, primeira_linha, linhas_encontradas, ultima_linha = encontrar_estudante(html, nr)
     return primeira_linha, linhas_encontradas, ultima_linha
 
