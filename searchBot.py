@@ -38,7 +38,8 @@ def obter_link(sigla):
         linha = df.loc[filtro].index[0]
         coluna = df.columns.get_loc('sigla da cadeira') + 1
         valor = df.iloc[linha, coluna]
-        return valor
+        retorno = 'https://fenix.isutc.ac.mz'+str(valor)
+        return retorno
     except IndexError:
         return None
     except FileNotFoundError:
