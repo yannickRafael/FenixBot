@@ -1,5 +1,5 @@
 from config import *
-import searchBot as bot
+from searchBot import getNotas as getNotas
 from twilio.rest import Client
 from flask import Flask, request, jsonify
 
@@ -9,6 +9,7 @@ def fill(string):
         return string
     else:
         return 'whatsapp:' + str(string)
+
 
 def format_answer(primeira_linha, linhas_encontradas, ultima_linha):
     ans = []
@@ -24,6 +25,7 @@ def format_answer(primeira_linha, linhas_encontradas, ultima_linha):
     for i in ans:
         text = text + i + '\n'
     return text
+
 
 def send(message, number):
     client = Client(account_sid, auth_token)
@@ -43,17 +45,16 @@ def bot():
     number = request.form.get('From')
     message = request.values.get('Body', '')
 
-    #send('Comando recebido, buscando notas', number)
+    # send('Comando recebido, buscando notas', number)
     keys = message.split('/')
-    if len(keys)!=3:
+    if len(keys) != 3:
         send(invalid_comand_error, number)
     else:
         send(f'procurando notas de {keys[2]} da cadeira {keys[1]}', number)
-        primeira_linha, linhas_encontradas, ultima_linha = bot.getNotas(keys[0], keys[1], keys[2])
+        primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1], keys[2])
 
         answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
         send(answer, number)
-
 
     return jsonify({'message': 'Success'})
 
