@@ -1,6 +1,6 @@
 import requests
 import re
-from config import login_url, username, password, mark_url
+from config import username, password
 
 
 def extract_hidden_lt(text):

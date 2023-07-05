@@ -43,6 +43,7 @@ app = Flask(__name__)
 @app.route('/', methods=['POST'])
 def bot():
     number = request.form.get('From')
+
     message = request.values.get('Body', '')
 
     # send('Comando recebido, buscando notas', number)

@@ -31,25 +31,23 @@ def encontrar_estudante(html, numero_estudante):
         return False, [], [], []
 
 
-def obter_link(curso, cadeira):
-    # Carrega o arquivo xlsx
-    df = pd.read_excel('cadeiras.xlsx')
-
-    # Filtra as linhas com base nas condições
-    filtro = (df['curso'] == curso) & (df['cadeira'].str.contains(cadeira) | (df['sigla da cadeira'] == cadeira))
-    linhas_filtradas = df[filtro]
-
-    # Verifica se encontrou alguma linha correspondente
-    if len(linhas_filtradas) > 0:
-        # Retorna o link da primeira linha correspondente
-        return 'https://fenix.isutc.ac.mz'+linhas_filtradas.iloc[0]['link da cadeira']
-
-    # Caso não encontre nenhuma correspondência, retorna None ou uma mensagem de erro adequada
-    return None
+def obter_link(sigla):
+    try:
+        df = pd.read_excel('cadeiras.xlsx')
+        filtro = df['sigla da cadeira'] == sigla
+        linha = df.loc[filtro].index[0]
+        coluna = df.columns.get_loc('sigla da cadeira') + 1
+        valor = df.iloc[linha, coluna]
+        return valor
+    except IndexError:
+        return None
+    except FileNotFoundError:
+        return None
 
 
 def getNotas(curso, cadeira, nr):
     print('==BOT STARTED==')
+    print(str(curso)+' '+str(cadeira))
     html = search.main(login_url, obter_link(curso, cadeira))
     b, primeira_linha, linhas_encontradas, ultima_linha = encontrar_estudante(html, nr)
     return primeira_linha, linhas_encontradas, ultima_linha
