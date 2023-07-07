@@ -73,7 +73,7 @@ def bot():
     if len(keys) != 3:
         send(invalid_comand_error, number)
     else:
-        if int(keys[2]) == 1 | 2:
+        if (keys[2] == '1')| (keys[2]=='2') :
             obter_sigla(keys[0], keys[1], keys[2])
         else:
             send(f'procurando notas de {keys[2]} da cadeira {keys[1]}', number)
