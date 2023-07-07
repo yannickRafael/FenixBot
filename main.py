@@ -78,7 +78,7 @@ def bot():
             send(answer, number)
         else:
             send(f'procurando notas de {keys[2]} da cadeira {keys[1]}', number)
-            primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1], keys[2])
+            primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[1], keys[2])
 
             answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
             send(answer, number)

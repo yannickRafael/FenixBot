@@ -78,9 +78,8 @@ def obter_sigla(curso, cadeira, semestre):
         return None
 
 
-def getNotas(curso, cadeira, nr):
+def getNotas(cadeira, nr):
     print('==BOT STARTED==')
-    print(str(curso) + ' ' + str(cadeira))
     html = search.main(login_url, obter_link(cadeira))
     b, primeira_linha, linhas_encontradas, ultima_linha = encontrar_estudante(html, nr)
     return primeira_linha, linhas_encontradas, ultima_linha
