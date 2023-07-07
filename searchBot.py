@@ -35,11 +35,43 @@ def obter_link(sigla):
     try:
         df = pd.read_excel('cadeiras.xlsx')
         filtro = df['sigla da cadeira'] == sigla
+        # filtro = (df['cadeira'].str.contains(sigla))
         linha = df.loc[filtro].index[0]
         coluna = df.columns.get_loc('sigla da cadeira') + 1
         valor = df.iloc[linha, coluna]
-        retorno = 'https://fenix.isutc.ac.mz'+str(valor)
+        retorno = 'https://fenix.isutc.ac.mz' + str(valor)
         return retorno
+    except IndexError:
+        return None
+    except FileNotFoundError:
+        return None
+
+
+def obter_sigla(curso, cadeira, semestre):
+    try:
+        semestre = int(semestre)
+        df = pd.read_excel('cadeiras.xlsx')
+        filtro = (df['semestre'] == semestre) & (df['curso'] == curso) & (df['cadeira'].str.contains(cadeira))
+        linha = df.loc[filtro]
+
+        print(len(linha))
+
+        nomes = []
+        siglas = []
+
+        for i in range(0, len(linha)):
+            coluna_nome = int(df.columns.get_loc('cadeira'))
+            coluna_sigla = int(df.columns.get_loc('sigla da cadeira'))
+            nome = df.iloc[linha.index[i], coluna_nome]
+            sigla = df.iloc[linha.index[i], coluna_sigla]
+            nomes.append(nome)
+            siglas.append(sigla)
+
+        txt = ''
+        for i in range(0, len(siglas)):
+            txt = txt + nomes[i] + ': ' + siglas[i]+'\n'
+        return txt
+
     except IndexError:
         return None
     except FileNotFoundError:
@@ -48,32 +80,12 @@ def obter_link(sigla):
 
 def getNotas(curso, cadeira, nr):
     print('==BOT STARTED==')
-    print(str(curso)+' '+str(cadeira))
+    print(str(curso) + ' ' + str(cadeira))
     html = search.main(login_url, obter_link(cadeira))
     b, primeira_linha, linhas_encontradas, ultima_linha = encontrar_estudante(html, nr)
     return primeira_linha, linhas_encontradas, ultima_linha
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+message = 'lecc/Artificial/1'
+keys = message.split('/')
+print(obter_sigla(keys[0], keys[1], keys[2]))

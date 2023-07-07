@@ -1,7 +1,29 @@
 from config import *
 from searchBot import getNotas as getNotas
+from searchBot import obter_sigla as obter_sigla
 from twilio.rest import Client
 from flask import Flask, request, jsonify
+import pandas as pd
+
+
+def buscar_cursos_por_semestre(curso, semestre):
+    # Ler o arquivo Excel
+    dados = pd.read_excel('cadeiras.xlsx')
+
+    # Filtrar as linhas que correspondem ao curso e semestre
+    filtro = (dados['curso'] == curso) & (dados['semestre'] == semestre)
+    cursos_encontrados = dados.loc[filtro]
+    print(cursos_encontrados)
+
+    # Verificar se foram encontrados cursos
+    if cursos_encontrados.empty:
+        return None, None
+
+    # Retornar as listas com nomes e siglas
+    nomes = cursos_encontrados['cadeira'].tolist()
+    siglas = cursos_encontrados['sigla da cadeira'].tolist()
+
+    return nomes, siglas
 
 
 def fill(string):
@@ -51,11 +73,14 @@ def bot():
     if len(keys) != 3:
         send(invalid_comand_error, number)
     else:
-        send(f'procurando notas de {keys[2]} da cadeira {keys[1]}', number)
-        primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1], keys[2])
+        if int(keys[2]) == 1 | 2:
+            obter_sigla(keys[0], keys[1], keys[2])
+        else:
+            send(f'procurando notas de {keys[2]} da cadeira {keys[1]}', number)
+            primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1], keys[2])
 
-        answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
-        send(answer, number)
+            answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
+            send(answer, number)
 
     return jsonify({'message': 'Success'})
 
