@@ -86,6 +86,6 @@ def getNotas(curso, cadeira, nr):
     return primeira_linha, linhas_encontradas, ultima_linha
 
 
-message = 'lecc/Artificial/1'
-keys = message.split('/')
-print(obter_sigla(keys[0], keys[1], keys[2]))
+# message = 'lecc/Artificial/1'
+# keys = message.split('/')
+# print(obter_sigla(keys[0], keys[1], keys[2]))
