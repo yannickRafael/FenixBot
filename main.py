@@ -51,7 +51,6 @@ def format_answer(primeira_linha, linhas_encontradas, ultima_linha):
 
 def send(message, number):
     client = Client(account_sid, auth_token)
-    message = fill(message)
     client.messages.create(
         from_='whatsapp:+14155238886',
         body=message,
