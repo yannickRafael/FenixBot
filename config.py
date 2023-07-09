@@ -7,3 +7,4 @@ login_url = 'https://fenix.isutc.ac.mz/cas/login?service=https://fenix.isutc.ac.
 logged_url = 'https://fenix.isutc.ac.mz/isutc/fenixEduIndex.do'
 mark_url = 'https://fenix.isutc.ac.mz/isutc/publico/executionCourse.do?method=marks&executionCourseID=1126312223704031'
 cursos = ["lca", "lea", "lect", "lecc", "lemec", "leet", "lee", "lef", "leit", "lemt", "lgbs", "lgf"]
+invalid_semester_error = 'Semestre inválido.'

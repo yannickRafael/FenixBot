@@ -69,19 +69,22 @@ def bot():
 
     # send('Comando recebido, buscando notas', number)
     keys = message.split('/')
-    if len(keys) != 3:
-        send(invalid_comand_error, number)
-    else:
+    if len(keys) == 2:
+        send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
+        primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1])
+        answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
+        send(answer, number)
+    elif len(keys)==3:
         if (keys[2] == '1')| (keys[2]=='2') :
             send(f'procurando as siglas de {keys[1]} do semestre {keys[2]}', number)
             answer = obter_sigla(keys[0], keys[1], keys[2])
             send(answer, number)
         else:
-            send(f'procurando notas de {keys[2]} da cadeira {keys[1]}', number)
-            primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[1], keys[2])
+            send(invalid_semester_error, number)
+    else:
+        send(invalid_comand_error, number)
 
-            answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
-            send(answer, number)
+
 
     return jsonify({'message': 'Success'})
 
