@@ -1,3 +1,4 @@
+import config
 from config import *
 from searchBot import getNotas as getNotas
 from searchBot import obter_sigla as obter_sigla
@@ -60,33 +61,80 @@ def send(message, number):
 
 app = Flask(__name__)
 
+dados_curso = ''
+dados_ano: str
+dados_semestre: str
+dados_cadeira: str
+
+
+
+
+
+
 
 @app.route('/', methods=['POST'])
 def bot():
     number = request.form.get('From')
-
     message = request.values.get('Body', '')
 
-    # send('Comando recebido, buscando notas', number)
-    keys = message.split('/')
-    if len(keys) == 2:
-        send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
-        primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1])
-        answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
-        send(answer, number)
-    elif len(keys)==3:
-        if (keys[2] == '1')| (keys[2]=='2') :
-            send(f'procurando as siglas de {keys[1]} do semestre {keys[2]}', number)
-            answer = obter_sigla(keys[0], keys[1], keys[2])
-            send(answer, number)
+
+    if config.state == 'blank':
+        send(config.main_menu.to_string(), number)
+    if config.state == config.states[0]:
+        if message in config.main_menu.range:
+            if message == '1':
+                send(config.menu_curso.to_string(), number)
+                config.state = config.menu_curso.estado
+            else:
+                send('Estamo a trabalhar no Sobre', number)
         else:
-            send(invalid_semester_error, number)
-    else:
-        send(invalid_comand_error, number)
-
-
+            send('Opção inválida', number)
+            send(config.main_menu.to_string(), number)
+    elif config.state == config.states[1]:
+        if message in config.menu_curso.range:
+            crs = config.menu_curso.options[int(message)]
+            extrair_cursos(crs)
+            config.state = config.menu_ano.estado
+            send(config.menu_ano.to_string(), number)
+        else:
+            send('Opção inválida', number)
+            send(config.menu_curso.to_string(), number)
+    elif config.state == config.states[2]:
+        if message in config.menu_curso.range:
+            ano = config.menu_ano.options[int(message)]
+            extrair_ano(ano)
+            config.state = config.menu_semestre.estado
+            send(config.menu_semestre.to_string(), number)
+        else:
+            send('Opção inválida', number)
+            send(config.menu_ano.to_string(), number)
+    elif config.state == config.states[3]:
+        if message in config.menu_semestre.range:
+            sem = config.menu_semestre.options[int(message)]
+            extrair_semestre(sem)
+            config.state = config.menu_cadeiras.estado
+            send(config.menu_cadeiras.to_string(), number)
+        else:
+            send('Opção inválida', number)
+            send(config.menu_semestre.to_string(), number)
+    elif config.state == config.states[4]:
+        if message in config.menu_cadeiras.range:
+            cad = config.menu_cadeiras.options[int(message)]
+            extrair_semestre(cad)
+            config.state = config.menu_cadeiras.estado
+            send(config.menu_cadeiras.to_string(), number)
+        else:
+            send('Opção inválida', number)
+            send(config.menu_semestre.to_string(), number)
 
     return jsonify({'message': 'Success'})
+
+
+
+
+
+
+
 
 
 if __name__ == "__main__":
