@@ -85,6 +85,7 @@ def bot():
             if message == '1':
                 send(config.menu_curso.to_string(), number)
                 config.state = config.menu_curso.estado
+                print(config.state)
             else:
                 send('Estamo a trabalhar no Sobre', number)
         else:
