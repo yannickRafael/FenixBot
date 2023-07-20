@@ -39,7 +39,7 @@ def obter_link(sigla):
         linha = df.loc[filtro].index[0]
         coluna = df.columns.get_loc('sigla') + 1
         valor = df.iloc[linha, coluna]
-        retorno = 'https://fenix.isutc.ac.mz' + str(valor)
+        retorno = str(valor)
         return retorno
     except IndexError:
         return None
