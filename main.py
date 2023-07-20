@@ -1,4 +1,4 @@
-from config import *
+from config import invalid_semester_error, invalid_comand_error, account_sid, auth_token, status, main_menu, menu_cursos
 from searchBot import getNotas as getNotas
 from searchBot import obter_sigla as obter_sigla
 from twilio.rest import Client
@@ -67,22 +67,19 @@ def bot():
 
     message = request.values.get('Body', '')
 
-    # send('Comando recebido, buscando notas', number)
-    keys = message.split('/')
-    if len(keys) == 2:
-        send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
-        primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1])
-        answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
-        send(answer, number)
-    elif len(keys)==3:
-        if (keys[2] == '1')| (keys[2]=='2') :
-            send(f'procurando as siglas de {keys[1]} do semestre {keys[2]}', number)
-            answer = obter_sigla(keys[0], keys[1], keys[2])
-            send(answer, number)
-        else:
-            send(invalid_semester_error, number)
-    else:
-        send(invalid_comand_error, number)
+    global status
+
+
+    if status == 'null':
+        send(main_menu, number)
+        status = main_menu.name
+    if status == 'main_menu':
+        if message in main_menu.range:
+            if message=='1':
+                send(menu_cursos, number)
+            if message=='2':
+                send('Estamos trabalhando nisso', number)
+
 
 
 
