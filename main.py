@@ -73,7 +73,8 @@ def bot():
         send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
         primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1])
         answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
-        send(answer, number+" ")
+        print('RESPOSTA: '+answer)
+        send(answer, number)
     elif len(keys)==3:
         if (keys[2] == '1')| (keys[2]=='2'):
             send(f'procurando as siglas de {keys[1]} do semestre {keys[2]}', number)
