@@ -24,3 +24,7 @@ class Menu:
                 return 'Opção inválida'
         except:
             return 'Opção inválida'
+
+
+    def get_name(self):
+        return self.name
