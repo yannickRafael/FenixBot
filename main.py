@@ -71,24 +71,30 @@ def bot():
     if status == 'null':
         send(main_menu.print_prompt(), number)
         status = main_menu.name
+        return jsonify({'message': 'Success'})
     if status == 'main_menu':
         if message in main_menu.range:
             if message=='1':
                 send(menu_cursos.print_prompt(), number)
                 status = menu_cursos.name
+                return jsonify({'message': 'Success'})
             if message=='2':
                 send('Estamos trabalhando nisso', number)
+                return jsonify({'message': 'Success'})
         else:
             send('Opção inválida, tente outra vez', number)
             send(main_menu.print_prompt(), number)
+            return jsonify({'message': 'Success'})
     if status == 'menu_cursos':
         if message in menu_cursos.range:
             global curso_filtro
             curso_filtro = menu_cursos.select_data(message)
             status = menu_cursos.get_name()
             send('selecionou o curso '+curso_filtro+'\n'+menu_ano.print_prompt(), number)
+            return jsonify({'message': 'Success'})
         else:
             send('Opção inválida, tente outra vez', number)
+            return jsonify({'message': 'Success'})
 
 
 
@@ -97,7 +103,7 @@ def bot():
 
 
 
-    return jsonify({'message': 'Success'})
+
 
 
 if __name__ == "__main__":
