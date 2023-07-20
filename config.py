@@ -11,12 +11,14 @@ cursos = ["lca", "lea", "lect", "lecc", "lemec", "leet", "lee", "lef", "leit", "
 invalid_semester_error = 'Semestre inválido.'
 comands_tutorial= '''Aqui estão os comandos e seu modo de uso:
 
-1. Para a busca de notas => notas:[sigla da cadeira]/[nr de estudante]
+1. Para a busca de notas 
+   ↳ notas:[sigla da cadeira]/[nr de estudante]
    ex: notas:PRDM-2/111 
    NB: as siglas são diferentes das acostumadas, e podem ser consultadas
        pelo comando a seguir
 
-2. Para a consulta de siglas => sigla:[curso]/[cadeira]/[semestre]
+2. Para a consulta de siglas
+   ↳ sigla:[curso]/[cadeira]/[semestre]
    ex: sigla:lecc/Análise/1
        sigla:lecc/Programação/2
    Quanto à parte da [cadeira], basta escrever uma palavra dentro do nome da cadeira'''
