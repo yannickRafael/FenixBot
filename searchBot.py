@@ -34,10 +34,10 @@ def encontrar_estudante(html, numero_estudante):
 def obter_link(sigla):
     try:
         df = pd.read_excel('cadeiras.xlsx')
-        filtro = df['sigla'] == sigla
+        filtro = df['sigla da cadeira'] == sigla
         # filtro = (df['cadeira'].str.contains(sigla))
         linha = df.loc[filtro].index[0]
-        coluna = df.columns.get_loc('sigla') + 1
+        coluna = df.columns.get_loc('sigla da cadeira') + 1
         valor = df.iloc[linha, coluna]
         retorno = 'https://fenix.isutc.ac.mz' + str(valor)
         return retorno
@@ -51,7 +51,7 @@ def obter_sigla(curso, cadeira, semestre):
     try:
         semestre = int(semestre)
         df = pd.read_excel('cadeiras.xlsx')
-        filtro = (df['semestre'] == semestre) & (df['curso'].str.lower() == curso.lower()) & (df['nome'].str.contains(cadeira, case=False))
+        filtro = (df['semestre'] == semestre) & (df['curso'].str.lower() == curso.lower()) & (df['cadeira'].str.contains(cadeira, case=False))
         linha = df.loc[filtro]
 
         print(len(linha))
@@ -60,8 +60,8 @@ def obter_sigla(curso, cadeira, semestre):
         siglas = []
 
         for i in range(0, len(linha)):
-            coluna_nome = int(df.columns.get_loc('nome'))
-            coluna_sigla = int(df.columns.get_loc('sigla'))
+            coluna_nome = int(df.columns.get_loc('cadeira'))
+            coluna_sigla = int(df.columns.get_loc('sigla da cadeira'))
             nome = df.iloc[linha.index[i], coluna_nome]
             sigla = df.iloc[linha.index[i], coluna_sigla]
             nomes.append(nome)
