@@ -51,7 +51,7 @@ def obter_sigla(curso, cadeira, semestre):
     try:
         semestre = int(semestre)
         df = pd.read_excel('cadeiras.xlsx')
-        filtro = (df['semestre'] == semestre) & (df['curso'].str.lower() == curso.lower()) & (df['cadeira'].str.contains(cadeira, case=False))
+        filtro = (df['semestre'] == semestre) & (df['curso'].str.lower() == curso.lower()) & (df['nome'].str.contains(cadeira, case=False))
         linha = df.loc[filtro]
 
         print(len(linha))
