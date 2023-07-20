@@ -3,7 +3,7 @@ from twilio.rest import Client
 from flask import Flask, request, jsonify
 import pandas as pd
 
-from searchBot import getNotas as getNotas
+from searchBot import getNotas as getNotas, obter_sigla
 
 
 def buscar_cursos_por_semestre(curso, semestre):
@@ -70,6 +70,8 @@ def bot():
     global status
     global search_number
     global search_subject
+    global semestre_filtro
+    global curso_filtro
     menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
 
 
@@ -92,7 +94,7 @@ def bot():
             return jsonify({'message': 'Success'})
     elif status == 'menu_cursos':
         if message in menu_cursos.range:
-            global curso_filtro
+
             curso_filtro = menu_cursos.select_data(message)
             status = menu_ano.get_name()
             send('selecionou o curso '+curso_filtro+'\n'+menu_ano.print_prompt(), number)
@@ -114,7 +116,7 @@ def bot():
             return jsonify({'message': 'Success'})
     elif status == 'menu_semestre':
         if message in menu_semestre.range:
-            global semestre_filtro
+
             semestre_filtro = menu_semestre.select_data(message)
             status = 'menu_cadeira'
             menu_cadeiras.set_options(extrair_nomes('filtro.xlsx'))
@@ -137,9 +139,10 @@ def bot():
             send('Opção inválida, tente outra vez', number)
             return jsonify({'message': 'Success'})
     elif status == 'insert':
-
+        nr_estudante = search_number
+        sigla = obter_sigla(curso_filtro, search_subject, semestre_filtro)
         number = message
-        primeira_linha, linhas_encontradas, ultima_linha = getNotas(search_subject, search_number)
+        primeira_linha, linhas_encontradas, ultima_linha = getNotas(sigla, nr_estudante)
         answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
         send(answer, number)
         status = 'null'
