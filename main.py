@@ -76,7 +76,7 @@ def bot():
         send(main_menu.print_prompt(), number)
         status = main_menu.name
         return jsonify({'message': 'Success'})
-    if status == 'main_menu':
+    elif status == 'main_menu':
         if message in main_menu.range:
             if message=='1':
                 send(menu_cursos.print_prompt(), number)
@@ -89,7 +89,7 @@ def bot():
             send('Opção inválida, tente outra vez', number)
             send(main_menu.print_prompt(), number)
             return jsonify({'message': 'Success'})
-    if status == 'menu_cursos':
+    elif status == 'menu_cursos':
         if message in menu_cursos.range:
             global curso_filtro
             curso_filtro = menu_cursos.select_data(message)
@@ -100,7 +100,7 @@ def bot():
         else:
             send('Opção inválida, tente outra vez', number)
             return jsonify({'message': 'Success'})
-    if status == 'menu_ano':
+    elif status == 'menu_ano':
         if message in menu_ano.range:
             global ano_filtro
             ano_filtro = menu_ano.select_data(message)
@@ -111,18 +111,18 @@ def bot():
         else:
             send('Opção inválida, tente outra vez', number)
             return jsonify({'message': 'Success'})
-    if status == 'menu_semestre':
+    elif status == 'menu_semestre':
         if message in menu_semestre.range:
             global semestre_filtro
             semestre_filtro = menu_semestre.select_data(message)
             status = 'menu_cadeira'
-            send('selecionou o semestre ' + semestre_filtro + '\n' + menu_semestre.print_prompt(), number)
+            # send('selecionou o semestre ' + semestre_filtro + '\n' + menu_cade.print_prompt(), number)
             extrair_semestre(semestre_filtro)
             return jsonify({'message': 'Success'})
         else:
             send('Opção inválida, tente outra vez', number)
             return jsonify({'message': 'Success'})
-    if status == 'menu_cadeira':
+    elif status == 'menu_cadeira':
         menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
         if message in menu_cadeiras.range:
 
@@ -134,7 +134,7 @@ def bot():
         else:
             send('Opção inválida, tente outra vez', number)
             return jsonify({'message': 'Success'})
-    if status == 'insert':
+    elif status == 'insert':
 
         number = message
         primeira_linha, linhas_encontradas, ultima_linha = getNotas(search_subject, search_number)
