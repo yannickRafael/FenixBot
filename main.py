@@ -32,6 +32,14 @@ def fill(string):
     else:
         return 'whatsapp:' + str(string)
 
+def get_command(texto):
+    indice_dois_pontos = texto.find(':')
+    if indice_dois_pontos != -1:
+        return texto[indice_dois_pontos + 1:].strip()
+    return ""
+
+
+
 
 def format_answer(primeira_linha, linhas_encontradas, ultima_linha):
     ans = []
@@ -68,22 +76,26 @@ def bot():
     message = request.values.get('Body', '')
 
     # send('Comando recebido, buscando notas', number)
-    keys = message.split('/')
-    if len(keys) == 2:
+    if message.startswith('comandos'):
+        send(comands_tutorial, number)
+    elif message.startswith('notas:'):
+        command = get_command(message)
+        keys = command.split('/')
         send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
         primeira_linha, linhas_encontradas, ultima_linha = getNotas(keys[0], keys[1])
         answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
-        print('RESPOSTA: '+answer)
         send(answer, number)
-    elif len(keys)==3:
-        if (keys[2] == '1')| (keys[2]=='2'):
+    elif message.startswith('sigla'):
+        command = get_command(message)
+        keys = command.split('/')
+        if (keys[2] == '1') | (keys[2] == '2'):
             send(f'procurando as siglas de {keys[1]} do semestre {keys[2]}', number)
             answer = obter_sigla(keys[0], keys[1], keys[2])
             send(answer, number)
         else:
             send(invalid_semester_error, number)
     else:
-        send(invalid_comand_error, number)
+        send(invalid_command_error, number)
 
 
 
