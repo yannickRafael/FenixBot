@@ -60,8 +60,8 @@ def obter_sigla(curso, cadeira, semestre):
         siglas = []
 
         for i in range(0, len(linha)):
-            coluna_nome = int(df.columns.get_loc('cadeira'))
-            coluna_sigla = int(df.columns.get_loc('sigla da cadeira'))
+            coluna_nome = int(df.columns.get_loc('nome'))
+            coluna_sigla = int(df.columns.get_loc('sigla'))
             nome = df.iloc[linha.index[i], coluna_nome]
             sigla = df.iloc[linha.index[i], coluna_sigla]
             nomes.append(nome)
