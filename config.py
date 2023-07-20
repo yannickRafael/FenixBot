@@ -119,12 +119,14 @@ menu_sobre = Menu('menu_sobre', 'Selecione o opção: ', [])
 menu_cursos = Menu('menu_cursos', 'Selecione um curso: ', cursos)
 menu_ano = Menu('menu_ano', 'Selecione o ano acadêmico: ', ['1º Ano', '2º Ano', '3º Ano', '4º Ano'])
 menu_semestre = Menu('menu_semestre', 'Selecione o semestre: ', ['1', '2'])
-menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
+
 status = 'null'
 
 ano_filtro = ''
 semestre_filtro = ''
 curso_filtro = ''
+search_number = ''
+search_subject = ''
 
 
 

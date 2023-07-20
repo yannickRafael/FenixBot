@@ -3,6 +3,8 @@ from twilio.rest import Client
 from flask import Flask, request, jsonify
 import pandas as pd
 
+from searchBot import getNotas as getNotas
+
 
 def buscar_cursos_por_semestre(curso, semestre):
     # Ler o arquivo Excel
@@ -89,12 +91,59 @@ def bot():
         if message in menu_cursos.range:
             global curso_filtro
             curso_filtro = menu_cursos.select_data(message)
-            status = menu_cursos.get_name()
+            status = menu_ano.get_name()
             send('selecionou o curso '+curso_filtro+'\n'+menu_ano.print_prompt(), number)
+            extrair_cursos(curso_filtro)
             return jsonify({'message': 'Success'})
         else:
             send('Opção inválida, tente outra vez', number)
             return jsonify({'message': 'Success'})
+    if status == 'menu_ano':
+        if message in menu_ano.range:
+            global ano_filtro
+            ano_filtro = menu_ano.select_data(message)
+            status = menu_semestre.name
+            send('selecionou o ' + ano_filtro + '\n' + menu_semestre.print_prompt(), number)
+            extrair_ano(ano_filtro)
+            return jsonify({'message': 'Success'})
+        else:
+            send('Opção inválida, tente outra vez', number)
+            return jsonify({'message': 'Success'})
+    if status == 'menu_semestre':
+        if message in menu_semestre.range:
+            global semestre_filtro
+            semestre_filtro = menu_semestre.select_data(message)
+            status = 'menu_cadeira'
+            send('selecionou o semestre ' + semestre_filtro + '\n' + menu_semestre.print_prompt(), number)
+            extrair_semestre(semestre_filtro)
+            return jsonify({'message': 'Success'})
+        else:
+            send('Opção inválida, tente outra vez', number)
+            return jsonify({'message': 'Success'})
+    if status == 'menu_cadeira':
+        menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
+        if message in menu_cadeiras.range:
+            global search_subject
+            search_subject = menu_cadeiras.select_data(message)
+            send('selecionou a cadeira '+search_subject, number)
+            status = 'insert'
+            send('Insira o número de estudante')
+            return jsonify({'message': 'Success'})
+        else:
+            send('Opção inválida, tente outra vez', number)
+            return jsonify({'message': 'Success'})
+    if status == 'insert':
+        global search_number
+        global search_subject
+        number = message
+        primeira_linha, linhas_encontradas, ultima_linha = getNotas(search_subject, search_number)
+        answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
+        send(answer, number)
+        status = 'null'
+        return jsonify({'message': 'Success'})
+
+
+
 
 
 
