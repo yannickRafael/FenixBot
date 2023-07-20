@@ -34,10 +34,10 @@ def encontrar_estudante(html, numero_estudante):
 def obter_link(sigla):
     try:
         df = pd.read_excel('cadeiras.xlsx')
-        filtro = df['sigla da cadeira'] == sigla
+        filtro = df['sigla'] == sigla
         # filtro = (df['cadeira'].str.contains(sigla))
         linha = df.loc[filtro].index[0]
-        coluna = df.columns.get_loc('sigla da cadeira') + 1
+        coluna = df.columns.get_loc('sigla') + 1
         valor = df.iloc[linha, coluna]
         retorno = 'https://fenix.isutc.ac.mz' + str(valor)
         return retorno
