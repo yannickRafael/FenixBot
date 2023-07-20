@@ -122,7 +122,7 @@ menu_semestre = Menu('menu_semestre', 'Selecione o semestre: ', ['1', '2'])
 menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
 status = 'null'
 
-print(main_menu.print_prompt())
+
 
 
 
