@@ -29,3 +29,7 @@ class Menu:
 
     def get_name(self):
         return self.name
+
+
+    def set_options(self, options):
+        self.options = options

@@ -70,6 +70,7 @@ def bot():
     global status
     global search_number
     global search_subject
+    menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
 
 
     if status == 'null':
@@ -116,16 +117,17 @@ def bot():
             global semestre_filtro
             semestre_filtro = menu_semestre.select_data(message)
             status = 'menu_cadeira'
-            # send('selecionou o semestre ' + semestre_filtro + '\n' + menu_cade.print_prompt(), number)
+            menu_cadeiras.set_options(extrair_nomes('filtro.xlsx'))
+            send(menu_cadeiras.print_prompt(), number)
             extrair_semestre(semestre_filtro)
             return jsonify({'message': 'Success'})
         else:
             send('Opção inválida, tente outra vez', number)
             return jsonify({'message': 'Success'})
     elif status == 'menu_cadeira':
-        menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
+
         if message in menu_cadeiras.range:
-            send(menu_cadeiras.print_prompt(), number)
+
             search_subject = menu_cadeiras.select_data(message)
             send('selecionou a cadeira '+search_subject, number)
             status = 'insert'
