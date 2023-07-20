@@ -1,6 +1,4 @@
-from config import invalid_semester_error, invalid_comand_error, account_sid, auth_token, status, main_menu, menu_cursos
-from searchBot import getNotas as getNotas
-from searchBot import obter_sigla as obter_sigla
+from config import *
 from twilio.rest import Client
 from flask import Flask, request, jsonify
 import pandas as pd
@@ -77,8 +75,24 @@ def bot():
         if message in main_menu.range:
             if message=='1':
                 send(menu_cursos.print_prompt(), number)
+                status = menu_cursos.name
             if message=='2':
                 send('Estamos trabalhando nisso', number)
+        else:
+            send('Opção inválida, tente outra vez', number)
+            send(main_menu.print_prompt(), number)
+    if status == 'menu_cursos':
+        if message in menu_cursos.range:
+            global curso_filtro
+            curso_filtro = menu_cursos.select_data(message)
+            status = menu_cursos.get_name()
+            send('selecionou o curso '+curso_filtro+'\n'+menu_ano.print_prompt(), number)
+        else:
+            send('Opção inválida, tente outra vez', number)
+
+
+
+
 
 
 
