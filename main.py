@@ -68,6 +68,8 @@ def bot():
     message = request.values.get('Body', '')
 
     global status
+    global search_number
+    global search_subject
 
 
     if status == 'null':
@@ -123,7 +125,7 @@ def bot():
     if status == 'menu_cadeira':
         menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
         if message in menu_cadeiras.range:
-            global search_subject
+
             search_subject = menu_cadeiras.select_data(message)
             send('selecionou a cadeira '+search_subject, number)
             status = 'insert'
@@ -133,8 +135,7 @@ def bot():
             send('Opção inválida, tente outra vez', number)
             return jsonify({'message': 'Success'})
     if status == 'insert':
-        global search_number
-        global search_subject
+
         number = message
         primeira_linha, linhas_encontradas, ultima_linha = getNotas(search_subject, search_number)
         answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
