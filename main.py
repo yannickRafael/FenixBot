@@ -71,12 +71,12 @@ def bot():
 
 
     if status == 'null':
-        send(main_menu.prompt, number)
+        send(main_menu.print_prompt(), number)
         status = main_menu.name
     if status == 'main_menu':
         if message in main_menu.range:
             if message=='1':
-                send(menu_cursos.prompt, number)
+                send(menu_cursos.print_prompt(), number)
             if message=='2':
                 send('Estamos trabalhando nisso', number)
 

@@ -13,6 +13,7 @@ class Menu:
         text = self.prompt + ': \n'
         for i in range(0, len(self.options)):
             text = text + str(1 + i) + '. ' + self.options[i] + '\n'
+        print('Tamanho das opções: '+str(len(self.options)))
         return text
 
     def select_data(self, message):

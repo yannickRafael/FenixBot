@@ -110,9 +110,9 @@ mark_url = 'https://fenix.isutc.ac.mz/isutc/publico/executionCourse.do?method=ma
 cursos = ["lca", "lea", "lect", "lecc", "lemec", "leet", "lee", "lef", "leit", "lemt", "lgbs", "lgf"]
 invalid_semester_error = 'Semestre inválido.'
 
-extrair_cursos('leit')
-extrair_ano('1º Ano')
-extrair_semestre('1')
+# extrair_cursos('leit')
+# extrair_ano('1º Ano')
+# extrair_semestre('1')
 
 main_menu = Menu('main_menu', 'Selecione a operação: ', ['Cursos', 'Sobre'])
 menu_sobre = Menu('menu_sobre', 'Selecione o opção: ', [])
@@ -121,6 +121,8 @@ menu_ano = Menu('menu_ano', 'Selecione o ano acadêmico: ', ['1º Ano', '2º Ano
 menu_semestre = Menu('menu_semestre', 'Selecione o semestre: ', ['1', '2'])
 menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
 status = 'null'
+
+print(main_menu.print_prompt())
 
 
 
