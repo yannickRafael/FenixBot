@@ -125,11 +125,11 @@ def bot():
     elif status == 'menu_cadeira':
         menu_cadeiras = Menu('menu_cadeira', 'Selecione a cadeira', extrair_nomes('filtro.xlsx'))
         if message in menu_cadeiras.range:
-
+            send(menu_cadeiras.print_prompt(), number)
             search_subject = menu_cadeiras.select_data(message)
             send('selecionou a cadeira '+search_subject, number)
             status = 'insert'
-            send('Insira o número de estudante')
+            send('Insira o número de estudante', number)
             return jsonify({'message': 'Success'})
         else:
             send('Opção inválida, tente outra vez', number)
