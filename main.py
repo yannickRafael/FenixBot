@@ -75,6 +75,8 @@ def bot():
 
     message = request.values.get('Body', '')
 
+
+
     # send('Comando recebido, buscando notas', number)
     if message.startswith('comandos'):
         send(comands_tutorial, number)
