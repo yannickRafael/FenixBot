@@ -24,6 +24,6 @@ comands_tutorial= '''Aqui estão os comandos e seu modo de uso:
    Quanto à parte da [cadeira], basta escrever uma palavra dentro do nome da cadeira'''
 
 
-print(comands_tutorial)
+
 
 

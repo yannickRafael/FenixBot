@@ -1,10 +1,11 @@
 from config import *
-
+from searchBot import getNotas as getNotas
+from searchBot import obter_sigla as obter_sigla
 from twilio.rest import Client
 from flask import Flask, request, jsonify
 import pandas as pd
 import FirebaseQuery as fbq
-from WebScrapper import encontrar_estudante
+
 
 def buscar_cursos_por_semestre(curso, semestre):
     # Ler o arquivo Excel
@@ -58,24 +59,20 @@ def format_answer(primeira_linha, linhas_encontradas, ultima_linha):
 
 
 def send(message, number):
-    client = Client(account_sid, auth_token)
-    client.messages.create(
-        from_='whatsapp:+14155238886',
-        body=message,
-        to=number
-    )
+    # client = Client(account_sid, auth_token)
+    # client.messages.create(
+    #     from_='whatsapp:+14155238886',
+    #     body=message,
+    #     to=number
+    # )
+    print(message)
 
 
-app = Flask(__name__)
 
+if __name__ == "__main__":
+    number = 'any'
 
-@app.route('/', methods=['POST'])
-def bot():
-    number = request.form.get('From')
-
-    message = request.values.get('Body', '')
-
-
+    message = 'notas:PWI/6108'
 
     # send('Comando recebido, buscando notas', number)
     if message.lower().startswith('comandos'):
@@ -86,12 +83,15 @@ def bot():
         answer = ''
         send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
         link = fbq.link_query(keys[0])
-        if link =='none':
+        if link == 'none':
             answer = 'Nenhum resultado encontrado 😞. Sigla da cadeira não encontrada'
             send(answer, number)
         else:
-            answer = encontrar_estudante(link, keys[1])
+            primeira_linha, linhas_encontradas, ultima_linha = getNotas(link, keys[1])
+            print(link+': de '+keys[1])
+            answer = format_answer(primeira_linha, linhas_encontradas, ultima_linha)
             send(answer, number)
+
 
 
 
@@ -107,10 +107,3 @@ def bot():
     else:
         send(invalid_command_error, number)
 
-
-
-    return jsonify({'message': 'Success'})
-
-
-if __name__ == "__main__":
-    app.run()
