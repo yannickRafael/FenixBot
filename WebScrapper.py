@@ -1,15 +1,9 @@
 from bs4 import BeautifulSoup
-import firebase_admin
 import requests
-from firebase_admin import credentials, db
 import re
-from config import username, password, login_url
+from config import username, password, login_url, cadeiras_ref
 
-cred = credentials.Certificate('key.json')
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://fenixbot-isutc-default-rtdb.firebaseio.com/'
-})
-cadeiras_ref = db.reference('files/cadeiras')
+
 session = requests.Session()
 
 
@@ -22,31 +16,6 @@ def extract_hidden_lt(text):
         return None
 
 
-# def encontrar_estudante(html, numero_estudante):
-#     soup = BeautifulSoup(html, 'html.parser')
-#     tabelas = soup.find_all('table')  # Encontra todas as tabelas no código HTML
-#     linha_encontrada = None
-#     primeira_linha_tabela = None
-#     ultima_linha_tabela = None
-#
-#     for tabela in tabelas:
-#         linhas = tabela.find_all('tr')  # Encontra todas as linhas (tr) na tabela
-#         for i, linha in enumerate(linhas):
-#             celulas = linha.find_all(['td', 'th'])  # Encontra todas as células (td/th) na linha
-#             primeira_celula = celulas[0] if celulas else None  # Obtém a primeira célula da linha
-#             if primeira_celula and numero_estudante in primeira_celula.text:
-#                 linha_encontrada = [celula.text.strip() for celula in
-#                                     celulas]  # Obtém o texto de todas as células da linha
-#             if i == 0:
-#                 primeira_linha_tabela = [celula.text.strip() for celula in
-#                                          celulas]  # Obtém o texto de todas as células da primeira linha
-#             ultima_linha_tabela = [celula.text.strip() for celula in
-#                                    celulas]  # Obtém o texto de todas as células da última linha
-#
-#     if linha_encontrada:
-#         return True, linha_encontrada, primeira_linha_tabela, ultima_linha_tabela
-#     else:
-#         return False, [], [], []
 
 def encontrar_estudante(link, numero_estudante):
     s = requests.Session()

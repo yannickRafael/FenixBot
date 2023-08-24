@@ -1,3 +1,15 @@
+import firebase_admin
+from firebase_admin import credentials, db
+cred = credentials.Certificate('key.json')
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://fenixbot-isutc-default-rtdb.firebaseio.com/'
+})
+
+
+cadeiras_ref = db.reference('files/cadeiras')
+
+
+
 account_sid = 'ACa5c83e45677a24409033440f8499727b'
 auth_token = 'c1b4fb1c0d36280276b9f8a0b6a68cf2'
 invalid_command_error = "Comando não reconhecido\nDigite 'comandos' para entender mais sobre os comandos"

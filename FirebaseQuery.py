@@ -1,12 +1,6 @@
-import firebase_admin
-from firebase_admin import credentials, db
+from config import cadeiras_ref
 from Cadeiras import Cadeiras
 
-cred = credentials.Certificate('key.json')
-firebase_admin.initialize_app(cred, {
-    'databaseURL': 'https://fenixbot-isutc-default-rtdb.firebaseio.com/'
-})
-cadeiras_ref = db.reference('files/cadeiras')
 
 
 def cadeiras_query(curso, ano, semestre):
@@ -34,7 +28,6 @@ def cadeiras_query(curso, ano, semestre):
 
 
 def siglas_query(curso, cadeira, semestre):
-    cadeiras_ref = db.reference('files/cadeiras')
 
     # Consultar dados onde "curso", "cadeira" e "semestre" correspondem aos valores desejados
     snapshot = (cadeiras_ref
@@ -67,7 +60,6 @@ def siglas_query(curso, cadeira, semestre):
 
 
 def link_query(key):
-    cadeiras_ref = db.reference('files/cadeiras')
 
     link = 'none'
 
@@ -85,6 +77,4 @@ def link_query(key):
 
 
 
-link = link_query('ACEL')
-print(link)
 
