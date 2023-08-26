@@ -50,7 +50,7 @@ def encontrar_estudante(link, numero_estudante):
 
         for table in tables:
             td = table.find('td', text=lambda text: text and text.strip() == '6108')
-            print(td.text)
+
             if td:
                 tr = td.find_parent('tr')
                 tds = tr.find_all('td')
