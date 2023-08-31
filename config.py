@@ -33,7 +33,13 @@ comands_tutorial= '''Aqui estão os comandos e seu modo de uso:
    ↳ sigla:[curso]/[cadeira]/[semestre]
    ex: sigla:lecc/Análise/1
        sigla:lecc/Programação/2
-   Quanto à parte da [cadeira], basta escrever uma palavra dentro do nome da cadeira'''
+   Quanto à parte da [cadeira], basta escrever uma palavra dentro do nome da cadeira
+   
+3. Para pagar mensalidade
+   ↳ pagar:[numero-mpesa]/[referência]/[valor]
+   ex: pagar:841111111/1000/11500   
+   
+'''
 
 
 

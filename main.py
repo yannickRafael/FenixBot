@@ -1,5 +1,5 @@
 from config import *
-
+from payment import pay
 from twilio.rest import Client
 from flask import Flask, request, jsonify
 import pandas as pd
@@ -104,6 +104,12 @@ def bot():
             send(answer, number)
         else:
             send(invalid_semester_error, number)
+    elif message.lower().startswith('pagar'):
+        command = get_command(message)
+        keys = command.split('/')
+        send("Aguarde, irá receber uma notificação para completar o pagamento")
+        res, data = pay(keys[2], keys[0], keys[1], )
+        send(res, number)
     else:
         send(invalid_command_error, number)
 
