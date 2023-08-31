@@ -13,9 +13,9 @@ def pay(msisdn, reference, amount):
     "third_party_reference": reference+str(dt.now())
     }
     response = requests.post(URL, json=payment_data)
-    data = response.json()
-    if response.status_code == 200:
 
+    if response.status_code == 200:
+        data = response.json()
         if data.get("success"):
             res = "Payment successful"
             return res, data
@@ -27,5 +27,6 @@ def pay(msisdn, reference, amount):
         res = '204 error'
         return res, data
     else:
+        data = ' '
         res = "Request failed"
         return res, data
