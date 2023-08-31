@@ -110,6 +110,7 @@ def bot():
         send("Aguarde, irá receber uma notificação para completar o pagamento", number)
         res, data = pay(keys[2], keys[0], keys[1], )
         send(res, number)
+
     else:
         send(invalid_command_error, number)
 
