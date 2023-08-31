@@ -10,18 +10,22 @@ def pay(msisdn, reference, amount):
     "amount": amount,
     "msisdn": msisdn,
     "reference": reference,
-    "third_party_reference": 'lwqkwrgfk'
+    "third_party_reference": reference+str(dt.now())
     }
     response = requests.post(URL, json=payment_data)
-    data = 'success'
+    data = response.json()
     if response.status_code == 200:
-        data = response.json()
+
         if data.get("success"):
             res = "Payment successful"
             return res, data
         else:
             res = "Payment failed"
             return res, data
+    elif response.status_code == 204:
+        data = ''
+        res = '204 error'
+        return res, data
     else:
         res = "Request failed"
         return res, data
