@@ -22,10 +22,6 @@ def pay(msisdn, reference, amount):
         else:
             res = "Payment failed"
             return res, data
-    elif response.status_code == 204:
-        data = ''
-        res = '204 error'
-        return res, data
     else:
         data = ' '
         res = "Request failed"
