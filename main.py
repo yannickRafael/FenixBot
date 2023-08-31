@@ -108,7 +108,7 @@ def bot():
         command = get_command(message)
         keys = command.split('/')
         send("Aguarde, irá receber uma notificação para completar o pagamento", number)
-        res, data = pay('258'+keys[0], keys[1], keys[1], )
+        res, data = pay('258'+keys[0], keys[1], keys[2], )
         send(res, number)
 
     else:
