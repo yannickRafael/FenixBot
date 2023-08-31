@@ -10,7 +10,7 @@ def pay(msisdn, reference, amount):
     "amount": amount,
     "msisdn": msisdn,
     "reference": reference,
-    "third_party_reference": reference+str(dt.now())
+    "third_party_reference": reference
     }
     response = requests.post(URL, json=payment_data)
 
