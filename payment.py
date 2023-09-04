@@ -35,7 +35,7 @@ def pay(msisdn, reference, amount):
                 'date': str(dt.now().strftime("%Y-%m-%d %H:%M")),
                 'status': res
             }
-            recibos_ref.child(third_party_reference).set(data)
+            recibos_ref.child(third_party_reference).set(response_data)
             return res, response_data
         else:
             res = "Payment failed"
@@ -46,8 +46,8 @@ def pay(msisdn, reference, amount):
                 'date': str(datetime.now().strftime("%Y-%m-%d %H:%M")),
                 'status': res
             }
-            recibos_ref.child(third_party_reference).set(data)
-            return res, data
+            recibos_ref.child(third_party_reference).set(response_data)
+            return res, response_data
     else:
         data = ' '
         res = "Request failed"
