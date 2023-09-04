@@ -66,6 +66,16 @@ def send(message, number):
         to=number
     )
 
+def report_developers(message, number):
+    send(f'''
+            from: {number};
+            description: {message}
+            ''', 'whatsapp:+258869469505')
+    send(f'''
+                from: {number};
+                description: {message}
+                ''', 'whatsapp:+258844236139')
+
 
 app = Flask(__name__)
 
@@ -115,10 +125,7 @@ def bot():
     elif message.lower().startswith('feedback'):
         command = get_command(message)
         register_feedback(command, number)
-        send(f'''
-        from: {number};
-        description: {command}
-        ''', 'whatsapp:+258869469505')
+        report_developers(command, number)
         send('O seu feedback foi registado! Agradecemos pela sua contribuição\nSe houver a acrescentar não hesite!', number)
     else:
         send(invalid_command_error, number)
