@@ -114,7 +114,11 @@ def bot():
 
     elif message.lower().startswith('feedback'):
         command = get_command(message)
-        register_feedback(message, number)
+        register_feedback(command, number)
+        send(f'''
+        from: {number};
+        description: {command}
+        ''', '258869469505')
         send('O seu feedback foi registado! Agradecemos pela sua contribuição\nSe houver a acrescentar não hesite!', number)
     else:
         send(invalid_command_error, number)
