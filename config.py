@@ -8,7 +8,7 @@ firebase_admin.initialize_app(cred, {
 
 cadeiras_ref = db.reference('files/cadeiras')
 recibos_ref = db.reference('files/recibos')
-
+feedback_ref = db.reference('files/feedbacks')
 account_sid = 'ACa5c83e45677a24409033440f8499727b'
 auth_token = 'c1b4fb1c0d36280276b9f8a0b6a68cf2'
 invalid_command_error = "Comando não reconhecido\nDigite 'comandos' para entender mais sobre os comandos"
@@ -36,7 +36,12 @@ comands_tutorial= '''Aqui estão os comandos e seu modo de uso:
    
 3. Para pagar mensalidade
    ↳ pagar:[numero-mpesa]/[referência]/[valor]
-   ex: pagar:841111111/1000/11500   
+   NB: Este comando está em fase de testes. O pagamento não será efectivamente realizado
+   ex: pagar:841111111/1000/11500
+
+4. Para dar feedbacks sobre este bot
+   ↳ feedback:[feedback]
+   ex: feedback:Este bot precisa de melhorar no aspecto "x"
    
 '''
 

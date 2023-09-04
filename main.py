@@ -5,6 +5,7 @@ from flask import Flask, request, jsonify
 import pandas as pd
 import FirebaseQuery as fbq
 from WebScrapper import encontrar_estudante
+from FeedBack import register_feedback
 
 def buscar_cursos_por_semestre(curso, semestre):
     # Ler o arquivo Excel
@@ -111,10 +112,12 @@ def bot():
         res, data = pay('258'+keys[0], keys[1], keys[2])
         send(res, number)
 
+    elif message.lower().startswith('feedback'):
+        command = get_command(message)
+        register_feedback(message, number)
+        send('O seu feedback foi registado! Agradecemos pela sua contribuição\nSe houver a acrescentar não hesite!', number)
     else:
         send(invalid_command_error, number)
-
-
 
     return jsonify({'message': 'Success'})
 
