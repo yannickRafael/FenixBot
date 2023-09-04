@@ -118,7 +118,7 @@ def bot():
         send(f'''
         from: {number};
         description: {command}
-        ''', '258869469505')
+        ''', 'whatsapp:+258869469505')
         send('O seu feedback foi registado! Agradecemos pela sua contribuição\nSe houver a acrescentar não hesite!', number)
     else:
         send(invalid_command_error, number)
