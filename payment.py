@@ -32,7 +32,7 @@ def pay(msisdn, reference, amount):
                 'amount': amount,
                 'msisdn': msisdn,
                 'reference': reference,
-                'date': str(datetime.now().strftime("%Y-%m-%d %H:%M")),
+                'date': str(dt.now().strftime("%Y-%m-%d %H:%M")),
                 'status': res
             }
             recibos_ref.child(third_party_reference).set(data)
