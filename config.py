@@ -9,8 +9,8 @@ firebase_admin.initialize_app(cred, {
 cadeiras_ref = db.reference('files/cadeiras')
 recibos_ref = db.reference('files/recibos')
 feedback_ref = db.reference('files/feedbacks')
-account_sid = 'ACa5c83e45677a24409033440f8499727b'
-auth_token = 'c1b4fb1c0d36280276b9f8a0b6a68cf2'
+account_sid = 'AC288d2d620888f22e220ab9d50767e023'
+auth_token = '97b08b4d4715f9e17147a3f96d34c48c'
 invalid_command_error = "Comando não reconhecido\nDigite 'comandos' para entender mais sobre os comandos"
 
 username = 'yannick.matimbe'

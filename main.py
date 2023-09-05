@@ -68,13 +68,13 @@ def send(message, number):
 
 def report(message, number):
     send(f'''
-            from: {number};
-            description: {message}
-            ''', 'whatsapp:+258869469505')
+    from: {number};
+    description: {message}
+    ''', 'whatsapp:+258869469505')
     send(f'''
-                from: {number};
-                description: {message}
-                ''', 'whatsapp:+258844236139')
+    from: {number};
+    description: {message}
+    ''', 'whatsapp:+258844236139')
 
 
 app = Flask(__name__)
