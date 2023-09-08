@@ -109,12 +109,9 @@ def bot():
     elif message.strip().lower().startswith('sigla:'):
         command = get_command(message)
         keys = command.split('/')
-        if (keys[2] == '1') | (keys[2] == '2'):
-            send(f'procurando as siglas de {keys[1]} do semestre {keys[2]}', number)
-            answer = fbq.siglas_query(keys[0], keys[1], keys[2])
-            send(answer, number)
-        else:
-            send(invalid_semester_error, number)
+        send(f'procurando as siglas de {keys[1]} do semestre {keys[2]}', number)
+        answer = fbq.siglas_query(keys[0], keys[1])
+        send(answer, number)
     elif message.lower().startswith('pagar'):
         command = get_command(message)
         keys = command.split('/')

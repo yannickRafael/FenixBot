@@ -29,7 +29,7 @@ comands_tutorial= '''Aqui estão os comandos e seu modo de uso:
        pelo comando a seguir
 
 2. Para a consulta de siglas
-   ↳ sigla:[curso]/[cadeira]/[semestre]
+   ↳ sigla:[curso]/[cadeira]
    ex: sigla:lecc/Análise/1
        sigla:lecc/Programação/2
    Quanto à parte da [cadeira], basta escrever uma palavra dentro do nome da cadeira
