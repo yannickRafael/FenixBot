@@ -46,8 +46,15 @@ def siglas_query(curso, cadeira):
                                    link=val.get('link'))
             cadeiras_encontradas.append(cadeira_obj)
     # Criar uma lista de siglas a partir dos objetos Cadeiras
-    siglas_encontradas = [cadeira.sigla for cadeira in cadeiras_encontradas]
-    nome_das_cadeiras = [cadeira.nome for cadeira in cadeiras_encontradas]
+    print(f'Quantidade: {len(cadeiras_encontradas)}')
+    siglas_encontradas = []
+    nome_das_cadeiras =[]
+    for i in cadeiras_encontradas:
+        siglas_encontradas.append(i.sigla)
+        nome_das_cadeiras.append(i.nome)
+
+
+
 
     ans = ''
     for i in range(0, len(siglas_encontradas)):
