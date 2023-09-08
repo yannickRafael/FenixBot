@@ -1,11 +1,9 @@
 from config import cadeiras_ref
 from Cadeiras import Cadeiras
-
+import unidecode
 
 
 def cadeiras_query(curso, ano, semestre):
-
-
     # Consultar dados onde "ano acadêmico", "semestre" e "curso" correspondem aos valores desejados
     snapshot = (cadeiras_ref
                 .order_by_child('ano')
@@ -27,8 +25,7 @@ def cadeiras_query(curso, ano, semestre):
     return nomesq
 
 
-def siglas_query(curso, cadeira, semestre):
-
+def siglas_query(curso, cadeira):
     # Consultar dados onde "curso", "cadeira" e "semestre" correspondem aos valores desejados
     snapshot = (cadeiras_ref
                 .order_by_child('curso')
@@ -38,7 +35,7 @@ def siglas_query(curso, cadeira, semestre):
     # Filtrar os dados pela cadeira e semestre e criar objetos da classe Cadeiras
     cadeiras_encontradas = []
     for key, val in snapshot.items():
-        if cadeira.lower() in val.get('nome').lower() and val.get('semestre') == semestre:
+        if cadeira.lower() in unidecode.unidecode(val.get('nome').lower()):
             cadeira_obj = Cadeiras(nome=val.get('nome'),
                                    sigla=key,
                                    ano=val.get('ano'),
@@ -52,15 +49,14 @@ def siglas_query(curso, cadeira, semestre):
 
     ans = ''
     for i in range(0, len(siglas_encontradas)):
-        ans = nome_das_cadeiras[i]+': '+siglas_encontradas[i]+'\n'
+        ans = nome_das_cadeiras[i] + ': ' + siglas_encontradas[i] + '\n'
 
-    if len(siglas_encontradas)==0:
+    if len(siglas_encontradas) == 0:
         ans = 'Nenhum resultado encontrado 😞'
     return ans
 
 
 def link_query(key):
-
     link = 'none'
 
     # Consultar dados onde a chave corresponde à chave fornecida
@@ -74,7 +70,3 @@ def link_query(key):
         link = snapshot[key].get('link')
 
     return link
-
-
-
-
