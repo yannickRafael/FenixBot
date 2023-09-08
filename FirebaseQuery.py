@@ -53,6 +53,9 @@ def siglas_query(curso, cadeira):
         siglas_encontradas.append(i.sigla)
         nome_das_cadeiras.append(i.nome)
 
+    print(f'Quantidade: {len(nome_das_cadeiras)}')
+    print(f'Quantidade: {len(siglas_encontradas)}')
+
 
 
 
