@@ -60,11 +60,12 @@ def siglas_query(curso, cadeira):
 
 
     ans = ''
-    for i in range(0, len(siglas_encontradas)):
-        ans = nome_das_cadeiras[i] + ': ' + siglas_encontradas[i] + '\n'
-
+    n = len(siglas_encontradas)
     if len(siglas_encontradas) == 0:
         ans = 'Nenhum resultado encontrado 😞'
+    else:
+        for i in range(0, n):
+            ans = ans + nome_das_cadeiras[i] + ': ' + siglas_encontradas[i] + '\n'
     return ans
 
 
