@@ -36,6 +36,7 @@ def siglas_query(curso, cadeira):
     cadeiras_encontradas = []
     for key, val in snapshot.items():
         name  = val.get('nome').lower()
+        print(f'Compare: {cadeira} and {name} ')
         if cadeira.lower() in name:
             cadeira_obj = Cadeiras(nome=val.get('nome'),
                                    sigla=key,
