@@ -94,37 +94,49 @@ def bot():
     elif message.lower().strip().startswith('notas:'):
         command = get_command(message)
         keys = command.split('/')
-        keys[0] = keys[0].strip()
-        keys[1] = keys[1].strip()
-        answer = ''
-        send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
-        link = fbq.link_query(keys[0].strip())
-        if link =='none':
-            answer = 'Nenhum resultado encontrado 😞. Sigla da cadeira não encontrada'
-            send(answer, number)
+
+        if len(keys) == 2:
+            keys[0] = keys[0].strip()
+            keys[1] = keys[1].strip()
+            answer = ''
+            send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
+            link = fbq.link_query(keys[0].strip())
+            if link == 'none':
+                answer = 'Nenhum resultado encontrado 😞. Sigla da cadeira não encontrada'
+                send(answer, number)
+            else:
+                answer = encontrar_estudante(link, keys[1].strip())
+                send(answer, number)
         else:
-            answer = encontrar_estudante(link, keys[1].strip())
-            send(answer, number)
+            send(invalid_command_error, number)
 
 
 
     elif message.strip().lower().startswith('sigla:'):
         command = get_command(message)
         keys = command.split('/')
-        keys[0] = keys[0].strip()
-        keys[1] = keys[1].strip()
-        keys[2] = keys[2].strip()
-        answer = fbq.siglas_query(keys[0], keys[1])
-        send(answer, number)
+
+        if len(keys) == 2:
+            keys[0] = keys[0].strip()
+            keys[1] = keys[1].strip()
+            keys[2] = keys[2].strip()
+            answer = fbq.siglas_query(keys[0], keys[1])
+            send(answer, number)
+        else:
+            send(invalid_command_error, number)
     elif message.lower().startswith('pagar'):
         command = get_command(message)
         keys = command.split('/')
-        keys[0] = keys[0].strip()
-        keys[1] = keys[1].strip()
-        keys[2] = keys[2].strip()
-        send("Aguarde, irá receber uma notificação para completar o pagamento", number)
-        res, data = pay('258'+keys[0], keys[1], keys[2])
-        send(res, number)
+
+        if len(keys)==3:
+            keys[0] = keys[0].strip()
+            keys[1] = keys[1].strip()
+            keys[2] = keys[2].strip()
+            send("Aguarde, irá receber uma notificação para completar o pagamento", number)
+            res, data = pay('258'+keys[0], keys[1], keys[2])
+            send(res, number)
+        else:
+            send(invalid_command_error, number)
 
     elif message.lower().startswith('feedback'):
         command = get_command(message)
