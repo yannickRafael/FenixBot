@@ -119,7 +119,6 @@ def bot():
         if len(keys) == 2:
             keys[0] = keys[0].strip()
             keys[1] = keys[1].strip()
-            keys[2] = keys[2].strip()
             answer = fbq.siglas_query(keys[0], keys[1])
             send(answer, number)
         else:
