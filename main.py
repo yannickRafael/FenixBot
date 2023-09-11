@@ -94,6 +94,8 @@ def bot():
     elif message.lower().strip().startswith('notas:'):
         command = get_command(message)
         keys = command.split('/')
+        keys[0] = keys[0].strip()
+        keys[1] = keys[1].strip()
         answer = ''
         send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
         link = fbq.link_query(keys[0].strip())
@@ -109,11 +111,17 @@ def bot():
     elif message.strip().lower().startswith('sigla:'):
         command = get_command(message)
         keys = command.split('/')
+        keys[0] = keys[0].strip()
+        keys[1] = keys[1].strip()
+        keys[2] = keys[2].strip()
         answer = fbq.siglas_query(keys[0], keys[1])
         send(answer, number)
     elif message.lower().startswith('pagar'):
         command = get_command(message)
         keys = command.split('/')
+        keys[0] = keys[0].strip()
+        keys[1] = keys[1].strip()
+        keys[2] = keys[2].strip()
         send("Aguarde, irá receber uma notificação para completar o pagamento", number)
         res, data = pay('258'+keys[0], keys[1], keys[2])
         send(res, number)
