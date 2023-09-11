@@ -35,7 +35,7 @@ def siglas_query(curso, cadeira):
     # Filtrar os dados pela cadeira e semestre e criar objetos da classe Cadeiras
     cadeiras_encontradas = []
     for key, val in snapshot.items():
-        name  = val.get('nome').lower()
+        name  = unidecode.unidecode(val.get('nome').lower())
         print(f'Compare: {cadeira} in {name} is {cadeira in name}')
         if cadeira.lower() in name:
             cadeira_obj = Cadeiras(nome=val.get('nome'),
