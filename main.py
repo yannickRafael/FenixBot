@@ -96,12 +96,12 @@ def bot():
         keys = command.split('/')
         answer = ''
         send(f'procurando notas de {keys[1]} da cadeira {keys[0]}', number)
-        link = fbq.link_query(keys[0])
+        link = fbq.link_query(keys[0].strip())
         if link =='none':
             answer = 'Nenhum resultado encontrado 😞. Sigla da cadeira não encontrada'
             send(answer, number)
         else:
-            answer = encontrar_estudante(link, keys[1])
+            answer = encontrar_estudante(link, keys[1].strip())
             send(answer, number)
 
 
