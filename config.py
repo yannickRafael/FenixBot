@@ -15,7 +15,7 @@ invalid_command_error = "Comando não reconhecido\nDigite 'comandos' para entend
 
 username = 'yannick.matimbe'
 password = 'Y@nnickR@fael2003'
-login_url = 'https://fenix.isutc.ac.mz/cas/login?service=https://fenix.isutc.ac.mz/isutc/'
+login_url = 'https://fenix.isutc.ac.mz:8443/cas/login?service='
 logged_url = 'https://fenix.isutc.ac.mz/isutc/fenixEduIndex.do'
 mark_url = 'https://fenix.isutc.ac.mz/isutc/publico/executionCourse.do?method=marks&executionCourseID=1126312223704031'
 cursos = ["lca", "lea", "lect", "lecc", "lemec", "leet", "lee", "lef", "leit", "lemt", "lgbs", "lgf"]
