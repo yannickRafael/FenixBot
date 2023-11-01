@@ -113,8 +113,8 @@ def bot():
                 answer = 'Nenhum resultado encontrado 😞. Sigla da cadeira não encontrada'
                 send(answer, number)
             else:
-                print(f'este é o link: {link}')
                 link = modify_link(link)
+                print(f'este é o link: {link}')
                 answer = encontrar_estudante(link, keys[1].strip())
                 send(answer, number)
         else:
