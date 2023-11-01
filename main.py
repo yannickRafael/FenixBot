@@ -114,7 +114,7 @@ def bot():
                 send(answer, number)
             else:
                 link = modify_link(link)
-                print(f'este é o link: {link}')
+                
                 answer = encontrar_estudante(link, keys[1].strip())
                 send(answer, number)
         else:
