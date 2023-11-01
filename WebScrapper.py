@@ -45,6 +45,7 @@ def encontrar_estudante(link, numero_estudante):
         soup = BeautifulSoup(response, 'html.parser')
 
         tables = soup.find_all('table', class_='tab_complex')
+        print(len(tables))
 
 
 
