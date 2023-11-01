@@ -32,6 +32,7 @@ def encontrar_estudante(link, numero_estudante):
     lt = extract_hidden_lt(request.text)
     execution = extract_hidden_execution(request.text)
     print(lt)
+    print(execution)
 
     payload = {
         'username': username,
