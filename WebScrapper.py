@@ -53,7 +53,7 @@ def encontrar_estudante(link, numero_estudante):
         total = []
         response = s.get(link).text
         print(link)
-        print(response)
+        
         soup = BeautifulSoup(response, 'html.parser')
         
 
