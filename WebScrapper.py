@@ -30,7 +30,7 @@ def encontrar_estudante(link, numero_estudante):
         'lt': lt,
         'execution': 'e1s1',
         '_eventId': 'submit',
-        'submit': 'ENTRAR'
+        'submit': 'LOGIN'
     }
 
 
