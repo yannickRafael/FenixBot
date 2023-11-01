@@ -15,6 +15,14 @@ def extract_hidden_lt(text):
     else:
         return None
 
+def extract_hidden_execution(text):
+    pattern = r'<input type="hidden" name="execution" value="(.*?)" />'
+    match = re.search(pattern, text)
+    if match:
+        return match.group(1)
+    else:
+        return None
+
 
 
 def encontrar_estudante(link, numero_estudante):
@@ -22,13 +30,14 @@ def encontrar_estudante(link, numero_estudante):
 
     request = s.get(login_url)
     lt = extract_hidden_lt(request.text)
+    execution = extract_hidden_execution(request.text)
     print(lt)
 
     payload = {
         'username': username,
         'password': password,
         'lt': lt,
-        'execution': 'e1s1',
+        'execution': execution,
         '_eventId': 'submit',
         'submit': 'LOGIN'
     }
@@ -48,13 +57,13 @@ def encontrar_estudante(link, numero_estudante):
         
 
         tables = soup.find_all('table', class_='tab_complex')
-        print(len(tables))
+        
 
 
 
         for table in tables:
             td = table.find('td', text=lambda text: text and text.strip() == numero_estudante)
-            print('este é o td: ' + td)
+            
             if td:
                 tr = td.find_parent('tr')
                 tds = tr.find_all('td')
@@ -85,6 +94,3 @@ def encontrar_estudante(link, numero_estudante):
     return 'Estudante não encontrado'
 
 
-# e = encontrar_estudante(
-#     'https://fenix.isutc.ac.mz/isutc/publico/executionCourse.do?method=marks&executionCourseID=281887293571686', '6108')
-# print(e)
