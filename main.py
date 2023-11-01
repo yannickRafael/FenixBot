@@ -7,6 +7,13 @@ import FirebaseQuery as fbq
 from WebScrapper import encontrar_estudante
 from FeedBack import register_feedback
 
+
+
+def modify_link(link):
+    novo_link = link.replace('https://fenix.isutc.ac.mz', 'https://fenixlbb.isutc.ac.mz:8443')
+    return novo_link
+
+
 def buscar_cursos_por_semestre(curso, semestre):
     # Ler o arquivo Excel
     dados = pd.read_excel('cadeiras.xlsx')
@@ -107,6 +114,7 @@ def bot():
                 send(answer, number)
             else:
                 print(f'este é o link: {link}')
+                link = modify_link(link)
                 answer = encontrar_estudante(link, keys[1].strip())
                 send(answer, number)
         else:
