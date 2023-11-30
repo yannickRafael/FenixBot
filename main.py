@@ -10,7 +10,7 @@ from FeedBack import register_feedback
 
 
 def modify_link(link):
-    novo_link = link.replace('https://fenix.isutc.ac.mz', 'https://fenixlgb.isutc.ac.mz:9443')
+    novo_link = link.replace('https://fenix.isutc.ac.mz', 'https://fenixlbg.isutc.ac.mz:9443')
     return novo_link
 
 
