@@ -8,7 +8,7 @@ from WebScrapper import encontrar_estudante
 from FeedBack import register_feedback
 
 
-
+#o link do website da faculdade foi alterado
 def modify_link(link):
     novo_link = link.replace('https://fenix.isutc.ac.mz', 'https://fenixlbb.isutc.ac.mz:8443')
     return novo_link
